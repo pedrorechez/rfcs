@@ -124,7 +124,7 @@
                     </t>
                     <t>
                         By evaluating the bitmask of a condition actors in the system can establish, even
-                        beforea fulfillment is published, if they will be able to verify the fulfilment.
+                        before a fulfillment is published, if they will be able to verify the fulfilment.
                     </t>
                 </section>
                 <section anchor="multi-signature" title="Multi-Signature">
@@ -372,7 +372,7 @@ Fulfillment ::= SEQUENCE {
                     PREFIX is a structural condition and is assigned the feature bit 2^2 = 0x04.
                 </t>
                 <t>
-                    A prefix condition condition contains exactly one subcondition. When validated it
+                    A prefix condition contains exactly one subcondition. When validated it
                     simply prepends the message to be validated with a constant string before passing
                     it on to the subcondition's validation function.
                 </t>
