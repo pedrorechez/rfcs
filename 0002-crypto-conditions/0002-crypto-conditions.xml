@@ -63,6 +63,13 @@
 
         <section anchor="intro" title="Introduction">
             <t>
+            	A payment in Interledger Protocol (ILP) requires interaction with several different ledgers. 
+            	This interaction is realized using a description of necessary conditions (i.e., events): 
+            	an event is associated to each of the ledgers and only when all events are fulfilled, 
+                payment is effectively carried out throughout the ledgers involved in the payment. 
+            </t>
+            
+            <t>
                 This specification describes a message format for defining distributable event
                 descriptions (crypto-conditions) and the cryptographically verifiable event messages
                 (fulfillments) that can be used to prove that the event occured.
@@ -100,7 +107,8 @@
             <section anchor="features" title="Features">
                 <t>
                     Crypto-conditions are a simple multi-algorithm, multi-level, multi-signature
-                    standard format for expressing conditions and fulfillments.
+                    standard format for expressing conditions and fulfillments. In the following we 
+                    describe the advantages of the chosen format.
                 </t>
 
                 <section anchor="multi-algorithm" title="Multi-Algorithm">
@@ -125,6 +133,9 @@
                     <t>
                         By evaluating the bitmask of a condition actors in the system can establish, even
                         before a fulfillment is published, if they will be able to verify the fulfilment.
+                        This is an important feature to avoid highly undesirable inconsistencies 
+                        between ledgers when an actor is not able to verify a given fulfilment while 
+                        other actors do verify it.
                     </t>
                 </section>
                 <section anchor="multi-signature" title="Multi-Signature">
@@ -151,6 +162,41 @@
                         signatures, but to conditions which can be signatures or further conditions. That
                         allows the creation of an arbitrary threshold boolean circuit of signatures.
                     </t>
+                    
+                    <figure>
+               +-----------+
+               | Root Cond |
+               |           |
+               +-----+-----+
+                     |
+                     |
+                     |
+                     |
+    +---------------------------------+
+    |                |                |
+    |                |                |
+    v                v                v
+
++--------+       +--------+       +--------+
+| Cond 1 |       | Cond 2 |       | Cond 3 |
+|        |       |        |       |        |
++--------+       +---+----+       +--------+
+                     |
+                     |
+                     |
+          +----------+----------+
+          |                     |
+          |                     |
+          v                     v
+
+     +----------+          +----------+
+     | Cond 2.1 |          | Cond 2.2 |
+     |          |          |          |
+     +----------+          +----------+
+     
+     Figure 1: Illustrative example of Multi-Level conditions.
+
+                    </figure>
                 </section>
             </section>
 
